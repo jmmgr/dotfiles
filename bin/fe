@@ -1,0 +1,9 @@
+#!/bin/bash
+# fe [fuzzy pattern] - open the selected file with the default editor
+#   - bypass fuzzy finder if there's only one match (--select-1)
+#   - exit if there's no match (--exit-0)
+shopt -s expand_aliases
+IFS=$'\n'
+files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
+[[ -n "$files" ]] && eval "$EDITOR" "${files[@]}"
+

@@ -1,0 +1,8 @@
+# make a memory dump of process passed as parameter
+pid=$1
+
+# generate gdb commands from the process's memory mappings using awk
+cat /proc/$pid/maps | awk '$6 !~ "^/" {split ($1,addrs,"-"); print "dump memory mem_" addrs[1] " 0x" addrs[1] " 0x" addrs[2] ;}END{print "quit"}' > gdb-commands
+
+# use gdb with the -x option to dump these memory regions to mem_* files
+gdb -p $pid -x gdb-commands

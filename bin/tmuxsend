@@ -1,0 +1,4 @@
+# In VIM send the selected text to the tmux pane specified as parameter
+stdin=$(</dev/stdin)
+echo $stdin
+tmux send-keys -t $1 "${stdin}"

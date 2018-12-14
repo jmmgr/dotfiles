@@ -1,0 +1,22 @@
+#!/bin/bash
+# Open the git repo page in a browser
+if [ "$#" -ne 1 ] && [ "$#" -ne 3 ] ; then
+  echo "Usage: ogit REMOTE_NAME [FILE_PATH] [LINE_NUMBER]"
+  exit 1
+fi
+
+url_remote=`git ls-remote --get-url $1`
+url_remote=${url_remote/git@github.com:/https:\/\/github.com/}
+url_remote=${url_remote/.git//}
+branch_name=$(< .git/HEAD)
+branch_name=${branch_name/ref: refs\/heads\///}
+
+if [ "$#" -eq 3 ] ; then
+	option_var="blob"
+	branch_name=$branch_name"/"$2"#L"$3
+else 
+	option_var="tree"
+fi
+echo $branch_name
+echo $url_remote$option_var$branch_name
+open $url_remote$option_var$branch_name &>/dev/null
