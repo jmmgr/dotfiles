@@ -48,8 +48,8 @@ export NVM_DIR=$HOME"/.nvm"
 PATH=$PATH:$NVM_DIR
 
 #add path from dropbox
-export DROPBOX_DIR=$HOME"/Dropbox/terminal/bin"
-PATH=$PATH:$DROPBOX_DIR
+export DOTFILES_BIN=$HOME"/git_private/dotfiles/bin"
+PATH=$PATH:$DOTFILES_BIN
 
 alias dnode="node-vim-inspector"
 alias grepn="grep -rn --exclude-dir={node_modules,log,coverage,.nyc_output}"
