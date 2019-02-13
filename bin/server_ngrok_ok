@@ -1,0 +1,28 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then 
+	echo 'Execute as: server_ngrok_ok 9090'
+	exit
+fi
+
+# if ngrok doesn't exist, we download it
+if [ ! -f ~/temp/ngrok ]; then 
+	echo 'We need to download ngrok be patient'
+	wget -P ~/Downloads https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip 
+	unzip ~/Downloads/ngrok-stable-linux-amd64.zip -d ~/temp/
+fi
+
+nc -lkp $1 -c 'echo -e "HTTP/1.1 200 OK\n\n $(date)"' &
+process_net_cat=$!
+echo 'listening pid ' $process_net_cat
+
+~/temp/ngrok http $1 
+
+trap "trap_clean" EXIT
+
+function trap_clean ()
+{
+    # cleaning
+    echo '****Cleaning**** ' $process_net_cat
+	kill $process_net_cat
+}
