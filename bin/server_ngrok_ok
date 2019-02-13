@@ -12,7 +12,7 @@ if [ ! -f ~/temp/ngrok ]; then
 	unzip ~/Downloads/ngrok-stable-linux-amd64.zip -d ~/temp/
 fi
 
-nc -lkp $1 -c 'echo -e "HTTP/1.1 200 OK\n\n $(date)"' &
+nc -lkp $1 -c 'echo -e "HTTP/1.1 200 OK\r\n\r\n $(date)"' &
 process_net_cat=$!
 echo 'listening pid ' $process_net_cat
 
