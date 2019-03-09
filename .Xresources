@@ -27,7 +27,7 @@ URxvt.intensityStyles:	false
 URxvt.background:       [80]#000000
 URxvt.foreground: 	#c8c8c8
 URxvt.depth:		32
-URxvt.font: 		xft:DejaVu Sans Mono:size=12	
+URxvt.font: 		xft:DejaVuSansMono Nerd Font:size=12
 URxvt.scrollBar:	false
 URxvt.cursorColor:	#00c00
 ! !! Extensions
@@ -52,3 +52,11 @@ URxvt*visualBell: true
 ! 
 !! Fading
 URxvt*fading:  30
+
+!! copy and paste
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+!! disable ISO 14755 mode (shift and control)
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
